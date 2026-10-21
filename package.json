@@ -1,0 +1,50 @@
+{
+  "name": "http-status",
+  "version": "0.0.1",
+  "private": true,
+  "description": "An opinionated starter template for TypeScript using the Bun ecosystem.",
+  "author": {
+    "name": "Lucas Stranks",
+    "email": "contact@lucastranks.com"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "type": "module",
+  "scripts": {
+    "app:start": "bun --env-file=.env run --filter '@http-status/my-app' start",
+    "app:dev": "bun --env-file=.env run --filter '@http-status/my-app' dev",
+    "web:start": "bun --env-file=.env run --filter '@http-status/web' start",
+    "web:dev": "bun --env-file=.env run --filter '@http-status/web' dev",
+    "db:push": "bun --env-file=.env run --filter '@http-status/database' push",
+    "db:generate": "bun --env-file=.env run --filter '@http-status/database' generate",
+    "db:migrate": "bun --env-file=.env run --filter '@http-status/database' migrate",
+    "prepare": "husky",
+    "format": "oxfmt .",
+    "lint": "oxlint .",
+    "typecheck": "bun run --filter '*' --if-present typecheck",
+    "stats": "bunx cloc . --exclude-dir=node_modules,out,types,include,.husky,.vscode,.idea,.forgejo,.github,.codex,.agents,.git --match-f=\"[.]tsx?$\""
+  },
+  "dependencies": {
+    "dotenv": "^18.0.5",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^21.2.3",
+    "@commitlint/config-conventional": "^21.2.3",
+    "@types/bun": "^1.4.2",
+    "@types/node": "^26.6.4",
+    "cloc": "^2.6.0-cloc",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.0",
+    "oxfmt": "^0.71.0",
+    "oxlint": "^1.86.0",
+    "oxlint-tsgolint": "^7.0.2003",
+    "typescript": "^7.0.2"
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": "bun run lint",
+    "src/**/*.{ts,tsx}": "bun run format"
+  }
+}

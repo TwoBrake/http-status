@@ -1,5 +1,5 @@
 // Resources
-import { Controller, Get, NotFoundException, Param } from "@nestjs/common";
+import { Controller, Get, NotFoundException, Param, ServiceUnavailableException } from "@nestjs/common";
 
 // Services
 import MonitorService, { type StateList } from "../services/monitor.service";
@@ -16,11 +16,15 @@ export default class MonitorController {
   @Get(":monitor")
   // oxlint-disable-next-line new-cap
   public getSpecificMonitor(@Param("monitor") monitorName: string): StateList[keyof StateList] {
-    const monitor = this.monitors.getState(monitorName);
-    if (monitor === undefined) {
+    const healthy = this.monitors.getState(monitorName);
+    if (healthy === undefined) {
       throw new NotFoundException("The following monitor was not found.");
     }
 
-    return monitor;
+    if (!healthy) {
+      throw new ServiceUnavailableException(healthy);
+    }
+
+    return healthy;
   }
 }

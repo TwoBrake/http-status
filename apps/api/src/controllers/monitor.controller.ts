@@ -17,7 +17,7 @@ export default class MonitorController {
   // oxlint-disable-next-line new-cap
   public getSpecificMonitor(@Param("monitor") monitorName: string): StateList[keyof StateList] {
     const monitor = this.monitors.getState(monitorName);
-    if (!monitor) {
+    if (monitor === undefined) {
       throw new NotFoundException("The following monitor was not found.");
     }
 

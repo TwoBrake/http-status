@@ -1,11 +1,18 @@
 // Resources
+import type { HttpCheck } from "@http-status/utility";
 import { createEnv } from "@t3-oss/env-core";
 import { z } from "zod";
 
 /** The repository's base configuration. */
 const configuration = {
-  logScopes: ["my-app", "web"],
-  webPort: 3000
+  checkInterval: 5,
+  checks: {
+    landing: {
+      url: "https://inticate.com"
+    }
+  } as Record<string, HttpCheck>,
+  logScopes: ["api"],
+  serverPort: 8080
 } as const;
 
 /** The repository's environment variables. */
@@ -19,7 +26,6 @@ export const environment = createEnv({
   runtimeEnv: process.env,
 
   server: {
-    DATABASE_URL: z.string(),
     FORCE_COLOR: z.number().optional().default(1),
     NODE_ENV: z.enum(["production", "development"]).optional().default("development")
   }

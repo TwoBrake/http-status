@@ -45,4 +45,4 @@ export const configureServerLogger = async (): Promise<void> => {
 export const createLogger = (category: (typeof configuration)["logScopes"][number]): Logger => getLogger(category);
 
 /* Export internal data. */
-export type * from "./types";
+export type * from "./types.d.ts";

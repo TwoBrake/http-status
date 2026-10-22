@@ -1,16 +1,17 @@
 // Resources
+import { Module } from "@nestjs/common";
+import { ScheduleModule } from "@nestjs/schedule";
+
 // Controllers
-import AppController from "../controllers/app.controller";
+// oxlint-disable-next-line sort-imports
+import MonitorController from "../controllers/monitor.controller";
 
 // Services
-import AppService from "../services/app.service";
-
-// Resources
-import { Module } from "@nestjs/common";
+import MonitorService from "../services/monitor.service";
 
 @Module({
-  controllers: [AppController],
-  imports: [],
-  providers: [AppService]
+  controllers: [MonitorController],
+  imports: [ScheduleModule.forRoot()],
+  providers: [MonitorService]
 })
 export class AppModule {}

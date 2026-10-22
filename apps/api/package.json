@@ -10,9 +10,12 @@
     "start:prod": "node dist/main"
   },
   "dependencies": {
+    "@http-status/config": "workspace:*",
+    "@http-status/utility": "workspace:*",
     "@nestjs/common": "^12.0.1",
     "@nestjs/core": "^12.0.1",
     "@nestjs/platform-express": "^12.0.1",
+    "@nestjs/schedule": "^12.0.2",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
   },

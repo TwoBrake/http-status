@@ -5,7 +5,7 @@ import configuration from "@http-status/config";
 
 type CheckKey = keyof typeof configuration.checks;
 
-type StateList = Record<CheckKey, boolean>;
+export type StateList = Record<CheckKey, boolean>;
 
 @Injectable()
 export default class MonitorService {
@@ -42,11 +42,11 @@ export default class MonitorService {
     }
   }
 
-  public getState(key: CheckKey): (typeof this.states)[keyof typeof this.states] {
+  public getState(key: CheckKey): StateList[keyof StateList] {
     return this.states[key];
   }
 
-  public getStates(): typeof this.states {
+  public getStates(): StateList {
     return this.states;
   }
 }
